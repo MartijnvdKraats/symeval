@@ -132,7 +132,7 @@ def _(Eq, L, Symbol, w):
 def _(beam_inputs, m_max_eq, mo, v_max_eq):
     m_max_result = m_max_eq.sym_evalf(subs=beam_inputs, output_unit="kN*m")
     v_max_result = v_max_eq.sym_evalf(subs=beam_inputs, output_unit="kN")
-    mo.hstack([m_max_result, v_max_result], align="start", justify="center", gap=3)
+    mo.vstack([m_max_result, v_max_result], align="start", gap=1)
     return
 
 
@@ -343,7 +343,7 @@ def _(
     except pint.errors.DimensionalityError:
         v_probe_result = v_probe_eq.sym_evalf(subs=probe_inputs)
 
-    mo.hstack([m_probe_result, v_probe_result], align="start", justify="center", gap=3)
+    mo.vstack([m_probe_result, v_probe_result], align="start", gap=1)
     return
 
 
@@ -452,7 +452,7 @@ def _(cf_inputs, cf_m_max_eq, cf_v_max_eq, mo, pint):
     except pint.errors.DimensionalityError:
         cf_m_max_result = cf_m_max_eq.sym_evalf(subs=cf_inputs)
     cf_v_max_result = cf_v_max_eq.sym_evalf(subs=cf_inputs, output_unit="kN")
-    mo.hstack([cf_m_max_result, cf_v_max_result], align="start", justify="center", gap=3)
+    mo.vstack([cf_m_max_result, cf_v_max_result], align="start", gap=1)
     return
 
 
@@ -655,7 +655,7 @@ def _(Eq, Quantity, Symbol, a, cf_inputs, cf_m_of_x_left, cf_m_of_x_right, cf_v_
     except pint.errors.DimensionalityError:
         cf_v_probe_result = cf_v_probe_eq.sym_evalf(subs=cf_probe_inputs)
 
-    mo.hstack([cf_m_probe_result, cf_v_probe_result], align="start", justify="center", gap=3)
+    mo.vstack([cf_m_probe_result, cf_v_probe_result], align="start", gap=1)
     return
 
 
@@ -757,7 +757,7 @@ def _(Eq, L, Symbol, cm_M0, cm_a, cm_length_slider, cm_pos_slider):
 def _(cm_inputs, cm_m_max_eq, cm_v_max_eq, mo):
     cm_m_max_result = cm_m_max_eq.sym_evalf(subs=cm_inputs, output_unit="kN*m")
     cm_v_max_result = cm_v_max_eq.sym_evalf(subs=cm_inputs, output_unit="kN")
-    mo.hstack([cm_m_max_result, cm_v_max_result], align="start", justify="center", gap=3)
+    mo.vstack([cm_m_max_result, cm_v_max_result], align="start", gap=1)
     return
 
 
@@ -961,7 +961,7 @@ def _(
         cm_m_probe_result = cm_m_probe_eq.sym_evalf(subs=cm_probe_inputs)
     cm_v_probe_result = cm_v_probe_eq.sym_evalf(subs=cm_probe_inputs, output_unit="kN")
 
-    mo.hstack([cm_m_probe_result, cm_v_probe_result], align="start", justify="center", gap=3)
+    mo.vstack([cm_m_probe_result, cm_v_probe_result], align="start", gap=1)
     return
 
 
@@ -1042,7 +1042,7 @@ def _(Eq, L, Symbol, lin_w0, sqrt):
 def _(lin_inputs, lin_m_max_eq, lin_v_max_eq, mo):
     lin_m_max_result = lin_m_max_eq.sym_evalf(subs=lin_inputs, output_unit="kN*m")
     lin_v_max_result = lin_v_max_eq.sym_evalf(subs=lin_inputs, output_unit="kN")
-    mo.hstack([lin_m_max_result, lin_v_max_result], align="start", justify="center", gap=3)
+    mo.vstack([lin_m_max_result, lin_v_max_result], align="start", gap=1)
     return
 
 
@@ -1221,7 +1221,7 @@ def _(Eq, Quantity, Symbol, lin_inputs, lin_m_of_x, lin_v_of_x, lin_x1_slider, m
     except pint.errors.DimensionalityError:
         lin_v_probe_result = lin_v_probe_eq.sym_evalf(subs=lin_probe_inputs)
 
-    mo.hstack([lin_m_probe_result, lin_v_probe_result], align="start", justify="center", gap=3)
+    mo.vstack([lin_m_probe_result, lin_v_probe_result], align="start", gap=1)
     return
 
 
@@ -1334,32 +1334,58 @@ def _(L, pl_a, pl_b, pl_w):
 
 
 @app.cell
-def _(Eq, Symbol, pl_R_A, pl_R_B, pl_a, pl_a_slider, pl_b_slider, pl_length_slider, pl_w):
-    pl_m_max_eq = Eq(Symbol("M_max"), pl_R_A * pl_a + pl_R_A**2 / (2 * pl_w))
+def _(Eq, Symbol, pl_R_A, pl_R_B):
+    # Chained (see CONTEXT.md): named as their own R_A/R_B symbols here and
+    # evaluated below, then that *result* - not the long underlying formula -
+    # is substituted into M_max/V_max, so those stay short enough to render
+    # without overflowing.
+    pl_R_A_eq = Eq(Symbol("R_A"), pl_R_A)
+    pl_R_B_eq = Eq(Symbol("R_B"), pl_R_B)
+    return pl_R_A_eq, pl_R_B_eq
+
+
+@app.cell
+def _(pl_R_A_eq, pl_R_B_eq, pl_inputs, mo, pint):
+    # A zero-width patch (a = b) makes both reactions exactly zero: symeval
+    # issue #5 again.
+    try:
+        pl_R_A_result = pl_R_A_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+    except pint.errors.DimensionalityError:
+        pl_R_A_result = pl_R_A_eq.sym_evalf(subs=pl_inputs)
+    try:
+        pl_R_B_result = pl_R_B_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+    except pint.errors.DimensionalityError:
+        pl_R_B_result = pl_R_B_eq.sym_evalf(subs=pl_inputs)
+    mo.vstack([pl_R_A_result, pl_R_B_result], align="start", gap=1)
+    return pl_R_A_result, pl_R_B_result
+
+
+@app.cell
+def _(Eq, Symbol, pl_R_A_result, pl_R_B_result, pl_a, pl_a_slider, pl_b_slider, pl_inputs, pl_length_slider, pl_w):
+    _R_A, _R_B = Symbol("R_A"), Symbol("R_B")
+    pl_m_max_eq = Eq(Symbol("M_max"), _R_A * pl_a + _R_A**2 / (2 * pl_w))
     # Which reaction is larger is decided on the plain slider floats (same
     # reasoning as the concentrated force/moment sections above).
     _R_A_val = (pl_b_slider.value - pl_a_slider.value) * (2 * pl_length_slider.value - pl_a_slider.value - pl_b_slider.value)
     _R_B_val = (pl_b_slider.value - pl_a_slider.value) * (pl_a_slider.value + pl_b_slider.value)
-    if _R_A_val >= _R_B_val:
-        pl_v_max_eq = Eq(Symbol("V_max"), pl_R_A)
-    else:
-        pl_v_max_eq = Eq(Symbol("V_max"), pl_R_B)
-    return pl_m_max_eq, pl_v_max_eq
+    pl_v_max_eq = Eq(Symbol("V_max"), _R_A if _R_A_val >= _R_B_val else _R_B)
+    pl_max_inputs = pl_inputs | {_R_A: pl_R_A_result.quantity, _R_B: pl_R_B_result.quantity}
+    return pl_m_max_eq, pl_max_inputs, pl_v_max_eq
 
 
 @app.cell
-def _(pl_inputs, pl_m_max_eq, pl_v_max_eq, mo, pint):
+def _(pl_m_max_eq, pl_max_inputs, pl_v_max_eq, mo, pint):
     # A zero-width patch (a = b) makes every reaction, and both maxima,
     # exactly zero: symeval issue #5 again.
     try:
-        pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_inputs, output_unit="kN*m")
+        pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_max_inputs, output_unit="kN*m")
     except pint.errors.DimensionalityError:
-        pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_inputs)
+        pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_max_inputs)
     try:
-        pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+        pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_max_inputs, output_unit="kN")
     except pint.errors.DimensionalityError:
-        pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_inputs)
-    mo.hstack([pl_m_max_result, pl_v_max_result], align="start", justify="center", gap=3)
+        pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_max_inputs)
+    mo.vstack([pl_m_max_result, pl_v_max_result], align="start", gap=1)
     return
 
 
@@ -1598,7 +1624,7 @@ def _(
     except pint.errors.DimensionalityError:
         pl_v_probe_result = pl_v_probe_eq.sym_evalf(subs=pl_probe_inputs)
 
-    mo.hstack([pl_m_probe_result, pl_v_probe_result], align="start", justify="center", gap=3)
+    mo.vstack([pl_m_probe_result, pl_v_probe_result], align="start", gap=1)
     return
 
 
@@ -1785,7 +1811,7 @@ def _(cfs_inputs, cfs_m_max_eq, cfs_v_max_eq, mo, pint):
         cfs_v_max_result = cfs_v_max_eq.sym_evalf(subs=cfs_inputs, output_unit="kN")
     except pint.errors.DimensionalityError:
         cfs_v_max_result = cfs_v_max_eq.sym_evalf(subs=cfs_inputs)
-    mo.hstack([cfs_m_max_result, cfs_v_max_result], align="start", justify="center", gap=3)
+    mo.vstack([cfs_m_max_result, cfs_v_max_result], align="start", gap=1)
     return
 
 
@@ -2020,7 +2046,7 @@ def _(
     except pint.errors.DimensionalityError:
         cfs_v_probe_result = cfs_v_probe_eq.sym_evalf(subs=cfs_probe_inputs)
 
-    mo.hstack([cfs_m_probe_result, cfs_v_probe_result], align="start", justify="center", gap=3)
+    mo.vstack([cfs_m_probe_result, cfs_v_probe_result], align="start", gap=1)
     return
 
 

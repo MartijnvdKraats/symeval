@@ -148,13 +148,13 @@ v_max_eq = Eq(Symbol("V_max"), w * L / 2)
 ```python
 m_max_result = m_max_eq.sym_evalf(subs=beam_inputs, output_unit="kN*m")
 v_max_result = v_max_eq.sym_evalf(subs=beam_inputs, output_unit="kN")
-mo.hstack([m_max_result, v_max_result], align="start", justify="center", gap=3)
+mo.vstack([m_max_result, v_max_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
 m_max_result = m_max_eq.sym_evalf(subs=beam_inputs, output_unit="kN*m")
 v_max_result = v_max_eq.sym_evalf(subs=beam_inputs, output_unit="kN")
-mo.hstack([m_max_result, v_max_result], align="start", justify="center", gap=3)
+mo.vstack([m_max_result, v_max_result], align="start", gap=1)
 ```
 
 ### Bending moment and shear as functions of position
@@ -440,7 +440,7 @@ try:
 except pint.errors.DimensionalityError:
     v_probe_result = v_probe_eq.sym_evalf(subs=probe_inputs)
 
-mo.hstack([m_probe_result, v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([m_probe_result, v_probe_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -462,7 +462,7 @@ try:
 except pint.errors.DimensionalityError:
     v_probe_result = v_probe_eq.sym_evalf(subs=probe_inputs)
 
-mo.hstack([m_probe_result, v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([m_probe_result, v_probe_result], align="start", gap=1)
 ```
 
 ## Concentrated force
@@ -607,7 +607,7 @@ try:
 except pint.errors.DimensionalityError:
     cf_m_max_result = cf_m_max_eq.sym_evalf(subs=cf_inputs)
 cf_v_max_result = cf_v_max_eq.sym_evalf(subs=cf_inputs, output_unit="kN")
-mo.hstack([cf_m_max_result, cf_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([cf_m_max_result, cf_v_max_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -618,7 +618,7 @@ try:
 except pint.errors.DimensionalityError:
     cf_m_max_result = cf_m_max_eq.sym_evalf(subs=cf_inputs)
 cf_v_max_result = cf_v_max_eq.sym_evalf(subs=cf_inputs, output_unit="kN")
-mo.hstack([cf_m_max_result, cf_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([cf_m_max_result, cf_v_max_result], align="start", gap=1)
 ```
 
 ### Bending moment and shear as functions of position
@@ -901,7 +901,7 @@ try:
 except pint.errors.DimensionalityError:
     cf_v_probe_result = cf_v_probe_eq.sym_evalf(subs=cf_probe_inputs)
 
-mo.hstack([cf_m_probe_result, cf_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([cf_m_probe_result, cf_v_probe_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -928,7 +928,7 @@ try:
 except pint.errors.DimensionalityError:
     cf_v_probe_result = cf_v_probe_eq.sym_evalf(subs=cf_probe_inputs)
 
-mo.hstack([cf_m_probe_result, cf_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([cf_m_probe_result, cf_v_probe_result], align="start", gap=1)
 ```
 
 ## Concentrated moment
@@ -1062,13 +1062,13 @@ cm_v_max_eq = Eq(Symbol("V_max"), cm_M0 / L)
 ```python
 cm_m_max_result = cm_m_max_eq.sym_evalf(subs=cm_inputs, output_unit="kN*m")
 cm_v_max_result = cm_v_max_eq.sym_evalf(subs=cm_inputs, output_unit="kN")
-mo.hstack([cm_m_max_result, cm_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([cm_m_max_result, cm_v_max_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
 cm_m_max_result = cm_m_max_eq.sym_evalf(subs=cm_inputs, output_unit="kN*m")
 cm_v_max_result = cm_v_max_eq.sym_evalf(subs=cm_inputs, output_unit="kN")
-mo.hstack([cm_m_max_result, cm_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([cm_m_max_result, cm_v_max_result], align="start", gap=1)
 ```
 
 ### Bending moment and shear as functions of position
@@ -1333,7 +1333,7 @@ except pint.errors.DimensionalityError:
     cm_m_probe_result = cm_m_probe_eq.sym_evalf(subs=cm_probe_inputs)
 cm_v_probe_result = cm_v_probe_eq.sym_evalf(subs=cm_probe_inputs, output_unit="kN")
 
-mo.hstack([cm_m_probe_result, cm_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([cm_m_probe_result, cm_v_probe_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -1354,7 +1354,7 @@ except pint.errors.DimensionalityError:
     cm_m_probe_result = cm_m_probe_eq.sym_evalf(subs=cm_probe_inputs)
 cm_v_probe_result = cm_v_probe_eq.sym_evalf(subs=cm_probe_inputs, output_unit="kN")
 
-mo.hstack([cm_m_probe_result, cm_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([cm_m_probe_result, cm_v_probe_result], align="start", gap=1)
 ```
 
 ## Linearly distributed load
@@ -1451,13 +1451,13 @@ lin_v_max_eq = Eq(Symbol("V_max"), lin_w0 * L / 3)
 ```python
 lin_m_max_result = lin_m_max_eq.sym_evalf(subs=lin_inputs, output_unit="kN*m")
 lin_v_max_result = lin_v_max_eq.sym_evalf(subs=lin_inputs, output_unit="kN")
-mo.hstack([lin_m_max_result, lin_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([lin_m_max_result, lin_v_max_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
 lin_m_max_result = lin_m_max_eq.sym_evalf(subs=lin_inputs, output_unit="kN*m")
 lin_v_max_result = lin_v_max_eq.sym_evalf(subs=lin_inputs, output_unit="kN")
-mo.hstack([lin_m_max_result, lin_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([lin_m_max_result, lin_v_max_result], align="start", gap=1)
 ```
 
 ### Bending moment and shear as functions of position
@@ -1705,7 +1705,7 @@ try:
 except pint.errors.DimensionalityError:
     lin_v_probe_result = lin_v_probe_eq.sym_evalf(subs=lin_probe_inputs)
 
-mo.hstack([lin_m_probe_result, lin_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([lin_m_probe_result, lin_v_probe_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -1723,7 +1723,7 @@ try:
 except pint.errors.DimensionalityError:
     lin_v_probe_result = lin_v_probe_eq.sym_evalf(subs=lin_probe_inputs)
 
-mo.hstack([lin_m_probe_result, lin_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([lin_m_probe_result, lin_v_probe_result], align="start", gap=1)
 ```
 
 ## Partial uniform load
@@ -1878,55 +1878,99 @@ pl_R_B = pl_w * (pl_b - pl_a) * (pl_a + pl_b) / (2 * L)
 ```
 
 ```python
-pl_m_max_eq = Eq(Symbol("M_max"), pl_R_A * pl_a + pl_R_A**2 / (2 * pl_w))
-# Which reaction is larger is decided on the plain slider floats (same
-# reasoning as the concentrated force/moment sections above).
-_R_A_val = (pl_b_slider.value - pl_a_slider.value) * (2 * pl_length_slider.value - pl_a_slider.value - pl_b_slider.value)
-_R_B_val = (pl_b_slider.value - pl_a_slider.value) * (pl_a_slider.value + pl_b_slider.value)
-if _R_A_val >= _R_B_val:
-    pl_v_max_eq = Eq(Symbol("V_max"), pl_R_A)
-else:
-    pl_v_max_eq = Eq(Symbol("V_max"), pl_R_B)
+# Chained (see CONTEXT.md): named as their own R_A/R_B symbols here and
+# evaluated below, then that *result* - not the long underlying formula -
+# is substituted into M_max/V_max, so those stay short enough to render
+# without overflowing.
+pl_R_A_eq = Eq(Symbol("R_A"), pl_R_A)
+pl_R_B_eq = Eq(Symbol("R_B"), pl_R_B)
 ```
 
 ```{python .marimo}
-pl_m_max_eq = Eq(Symbol("M_max"), pl_R_A * pl_a + pl_R_A**2 / (2 * pl_w))
+# Chained (see CONTEXT.md): named as their own R_A/R_B symbols here and
+# evaluated below, then that *result* - not the long underlying formula -
+# is substituted into M_max/V_max, so those stay short enough to render
+# without overflowing.
+pl_R_A_eq = Eq(Symbol("R_A"), pl_R_A)
+pl_R_B_eq = Eq(Symbol("R_B"), pl_R_B)
+```
+
+```python
+# A zero-width patch (a = b) makes both reactions exactly zero: symeval
+# issue #5 again.
+try:
+    pl_R_A_result = pl_R_A_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+except pint.errors.DimensionalityError:
+    pl_R_A_result = pl_R_A_eq.sym_evalf(subs=pl_inputs)
+try:
+    pl_R_B_result = pl_R_B_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+except pint.errors.DimensionalityError:
+    pl_R_B_result = pl_R_B_eq.sym_evalf(subs=pl_inputs)
+mo.vstack([pl_R_A_result, pl_R_B_result], align="start", gap=1)
+```
+
+```{python .marimo}
+# A zero-width patch (a = b) makes both reactions exactly zero: symeval
+# issue #5 again.
+try:
+    pl_R_A_result = pl_R_A_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+except pint.errors.DimensionalityError:
+    pl_R_A_result = pl_R_A_eq.sym_evalf(subs=pl_inputs)
+try:
+    pl_R_B_result = pl_R_B_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+except pint.errors.DimensionalityError:
+    pl_R_B_result = pl_R_B_eq.sym_evalf(subs=pl_inputs)
+mo.vstack([pl_R_A_result, pl_R_B_result], align="start", gap=1)
+```
+
+```python
+_R_A, _R_B = Symbol("R_A"), Symbol("R_B")
+pl_m_max_eq = Eq(Symbol("M_max"), _R_A * pl_a + _R_A**2 / (2 * pl_w))
 # Which reaction is larger is decided on the plain slider floats (same
 # reasoning as the concentrated force/moment sections above).
 _R_A_val = (pl_b_slider.value - pl_a_slider.value) * (2 * pl_length_slider.value - pl_a_slider.value - pl_b_slider.value)
 _R_B_val = (pl_b_slider.value - pl_a_slider.value) * (pl_a_slider.value + pl_b_slider.value)
-if _R_A_val >= _R_B_val:
-    pl_v_max_eq = Eq(Symbol("V_max"), pl_R_A)
-else:
-    pl_v_max_eq = Eq(Symbol("V_max"), pl_R_B)
+pl_v_max_eq = Eq(Symbol("V_max"), _R_A if _R_A_val >= _R_B_val else _R_B)
+pl_max_inputs = pl_inputs | {_R_A: pl_R_A_result.quantity, _R_B: pl_R_B_result.quantity}
+```
+
+```{python .marimo}
+_R_A, _R_B = Symbol("R_A"), Symbol("R_B")
+pl_m_max_eq = Eq(Symbol("M_max"), _R_A * pl_a + _R_A**2 / (2 * pl_w))
+# Which reaction is larger is decided on the plain slider floats (same
+# reasoning as the concentrated force/moment sections above).
+_R_A_val = (pl_b_slider.value - pl_a_slider.value) * (2 * pl_length_slider.value - pl_a_slider.value - pl_b_slider.value)
+_R_B_val = (pl_b_slider.value - pl_a_slider.value) * (pl_a_slider.value + pl_b_slider.value)
+pl_v_max_eq = Eq(Symbol("V_max"), _R_A if _R_A_val >= _R_B_val else _R_B)
+pl_max_inputs = pl_inputs | {_R_A: pl_R_A_result.quantity, _R_B: pl_R_B_result.quantity}
 ```
 
 ```python
 # A zero-width patch (a = b) makes every reaction, and both maxima,
 # exactly zero: symeval issue #5 again.
 try:
-    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_inputs, output_unit="kN*m")
+    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_max_inputs, output_unit="kN*m")
 except pint.errors.DimensionalityError:
-    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_inputs)
+    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_max_inputs)
 try:
-    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_max_inputs, output_unit="kN")
 except pint.errors.DimensionalityError:
-    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_inputs)
-mo.hstack([pl_m_max_result, pl_v_max_result], align="start", justify="center", gap=3)
+    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_max_inputs)
+mo.vstack([pl_m_max_result, pl_v_max_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
 # A zero-width patch (a = b) makes every reaction, and both maxima,
 # exactly zero: symeval issue #5 again.
 try:
-    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_inputs, output_unit="kN*m")
+    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_max_inputs, output_unit="kN*m")
 except pint.errors.DimensionalityError:
-    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_inputs)
+    pl_m_max_result = pl_m_max_eq.sym_evalf(subs=pl_max_inputs)
 try:
-    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_inputs, output_unit="kN")
+    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_max_inputs, output_unit="kN")
 except pint.errors.DimensionalityError:
-    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_inputs)
-mo.hstack([pl_m_max_result, pl_v_max_result], align="start", justify="center", gap=3)
+    pl_v_max_result = pl_v_max_eq.sym_evalf(subs=pl_max_inputs)
+mo.vstack([pl_m_max_result, pl_v_max_result], align="start", gap=1)
 ```
 
 ### Bending moment and shear as functions of position
@@ -2223,7 +2267,7 @@ try:
 except pint.errors.DimensionalityError:
     pl_v_probe_result = pl_v_probe_eq.sym_evalf(subs=pl_probe_inputs)
 
-mo.hstack([pl_m_probe_result, pl_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([pl_m_probe_result, pl_v_probe_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -2248,7 +2292,7 @@ try:
 except pint.errors.DimensionalityError:
     pl_v_probe_result = pl_v_probe_eq.sym_evalf(subs=pl_probe_inputs)
 
-mo.hstack([pl_m_probe_result, pl_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([pl_m_probe_result, pl_v_probe_result], align="start", gap=1)
 ```
 
 ## Concentrated forces
@@ -2486,7 +2530,7 @@ try:
     cfs_v_max_result = cfs_v_max_eq.sym_evalf(subs=cfs_inputs, output_unit="kN")
 except pint.errors.DimensionalityError:
     cfs_v_max_result = cfs_v_max_eq.sym_evalf(subs=cfs_inputs)
-mo.hstack([cfs_m_max_result, cfs_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([cfs_m_max_result, cfs_v_max_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -2499,7 +2543,7 @@ try:
     cfs_v_max_result = cfs_v_max_eq.sym_evalf(subs=cfs_inputs, output_unit="kN")
 except pint.errors.DimensionalityError:
     cfs_v_max_result = cfs_v_max_eq.sym_evalf(subs=cfs_inputs)
-mo.hstack([cfs_m_max_result, cfs_v_max_result], align="start", justify="center", gap=3)
+mo.vstack([cfs_m_max_result, cfs_v_max_result], align="start", gap=1)
 ```
 
 ### Bending moment and shear as functions of position
@@ -2788,7 +2832,7 @@ try:
 except pint.errors.DimensionalityError:
     cfs_v_probe_result = cfs_v_probe_eq.sym_evalf(subs=cfs_probe_inputs)
 
-mo.hstack([cfs_m_probe_result, cfs_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([cfs_m_probe_result, cfs_v_probe_result], align="start", gap=1)
 ```
 
 ```{python .marimo}
@@ -2813,7 +2857,7 @@ try:
 except pint.errors.DimensionalityError:
     cfs_v_probe_result = cfs_v_probe_eq.sym_evalf(subs=cfs_probe_inputs)
 
-mo.hstack([cfs_m_probe_result, cfs_v_probe_result], align="start", justify="center", gap=3)
+mo.vstack([cfs_m_probe_result, cfs_v_probe_result], align="start", gap=1)
 ```
 
 <a href="https://molab.marimo.io/github/bedrock-engineer/symeval/blob/main/examples/simply_supported_beam.py/wasm"><img src="https://marimo.io/molab-shield.svg" alt="Open in molab"></a>
