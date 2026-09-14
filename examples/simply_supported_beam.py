@@ -286,10 +286,10 @@ def _(
         )
         _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=_row, col=1)
 
-    _fig.update_yaxes(title_text="M (kN·m)", row=1, col=1)
+    _fig.update_yaxes(title_text="M (kN·m)", autorange="reversed", row=1, col=1)
     _fig.update_yaxes(title_text="V (kN)", row=2, col=1)
     _fig.update_xaxes(title_text="x (m)", row=2, col=1)
-    _fig.update_layout(height=600, margin=dict(t=60, b=40))
+    _fig.update_layout(height=600, margin=dict(t=60, b=40), template="plotly_white")
 
     _fig
     return
@@ -601,10 +601,10 @@ def _(
         )
         _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=_row, col=1)
 
-    _fig.update_yaxes(title_text="M (kN·m)", row=1, col=1)
+    _fig.update_yaxes(title_text="M (kN·m)", autorange="reversed", row=1, col=1)
     _fig.update_yaxes(title_text="V (kN)", row=2, col=1)
     _fig.update_xaxes(title_text="x (m)", row=2, col=1)
-    _fig.update_layout(height=600, margin=dict(t=60, b=40))
+    _fig.update_layout(height=600, margin=dict(t=60, b=40), template="plotly_white")
 
     _fig
     return
@@ -897,10 +897,10 @@ def _(
     _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=1, col=1)
     _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=2, col=1)
 
-    _fig.update_yaxes(title_text="M (kN·m)", row=1, col=1)
+    _fig.update_yaxes(title_text="M (kN·m)", autorange="reversed", row=1, col=1)
     _fig.update_yaxes(title_text="V (kN)", row=2, col=1)
     _fig.update_xaxes(title_text="x (m)", row=2, col=1)
-    _fig.update_layout(height=600, margin=dict(t=60, b=40))
+    _fig.update_layout(height=600, margin=dict(t=60, b=40), template="plotly_white")
 
     _fig
     return
@@ -1170,10 +1170,10 @@ def _(
         )
         _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=_row, col=1)
 
-    _fig.update_yaxes(title_text="M (kN·m)", row=1, col=1)
+    _fig.update_yaxes(title_text="M (kN·m)", autorange="reversed", row=1, col=1)
     _fig.update_yaxes(title_text="V (kN)", row=2, col=1)
     _fig.update_xaxes(title_text="x (m)", row=2, col=1)
-    _fig.update_layout(height=600, margin=dict(t=60, b=40))
+    _fig.update_layout(height=600, margin=dict(t=60, b=40), template="plotly_white")
 
     _fig
     return
@@ -1518,10 +1518,10 @@ def _(
         )
         _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=_row, col=1)
 
-    _fig.update_yaxes(title_text="M (kN·m)", row=1, col=1)
+    _fig.update_yaxes(title_text="M (kN·m)", autorange="reversed", row=1, col=1)
     _fig.update_yaxes(title_text="V (kN)", row=2, col=1)
     _fig.update_xaxes(title_text="x (m)", row=2, col=1)
-    _fig.update_layout(height=600, margin=dict(t=60, b=40))
+    _fig.update_layout(height=600, margin=dict(t=60, b=40), template="plotly_white")
 
     _fig
     return
@@ -1939,10 +1939,10 @@ def _(
         )
         _fig.add_hline(y=0, line=dict(color="black", width=0.8), row=_row, col=1)
 
-    _fig.update_yaxes(title_text="M (kN·m)", row=1, col=1)
+    _fig.update_yaxes(title_text="M (kN·m)", autorange="reversed", row=1, col=1)
     _fig.update_yaxes(title_text="V (kN)", row=2, col=1)
     _fig.update_xaxes(title_text="x (m)", row=2, col=1)
-    _fig.update_layout(height=600, margin=dict(t=60, b=40))
+    _fig.update_layout(height=600, margin=dict(t=60, b=40), template="plotly_white")
 
     _fig
     return
