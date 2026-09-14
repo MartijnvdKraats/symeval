@@ -17,42 +17,33 @@ app = marimo.App()
 
 
 @app.cell(hide_code=True)
-def _(IMAGES_DIR, mo):
-    mo.vstack(
-        [
-            mo.md(r"""
-            # Simply supported beam
+def _(mo):
+    mo.md(r"""
+    # Simply supported beam
 
-            Closed-form bending moment and shear diagrams for a simply supported
-            beam, worked with [SymEval](https://github.com/bedrock-engineer/symeval),
-            in the spirit of CalcpadCE's
-            [Simply Supported Beam](https://imartincei.github.io/CalcpadCE/examples/simply-supported-beams.html)
-            reference page.
+    Closed-form bending moment and shear diagrams for a simply supported
+    beam, worked with [SymEval](https://github.com/bedrock-engineer/symeval),
+    in the spirit of CalcpadCE's
+    [Simply Supported Beam](https://imartincei.github.io/CalcpadCE/examples/simply-supported-beams.html)
+    reference page.
 
-            Sign convention: $x$ is measured from the left support, a downward load
-            is positive, and a sagging moment is positive.
+    Sign convention: $x$ is measured from the left support, a downward load
+    is positive, and a sagging moment is positive.
 
-            ## Uniformly distributed load
+    ## Uniformly distributed load
 
-            A beam of length $L$, pinned at both ends, carries a uniformly
-            distributed load $w$ (force per unit length) over its full span.
-            Adjust the length and load below.
-            """),
-            mo.image(
-                IMAGES_DIR / "simply-supported-beam-distributed-load-uniform.png",
-                alt="Simply supported beam with a uniformly distributed load",
-                width=250,
-                caption="Schematic: CalcpadCE (MIT License)",
-            ),
-        ]
-    )
+    A beam of length $L$, pinned at both ends, carries a uniformly
+    distributed load $w$ (force per unit length) over its full span.
+    Adjust the length and load below.
+
+    ![Simply supported beam with a uniformly distributed load](public/simply-supported-beam-distributed-load-uniform.png)
+    *Schematic: CalcpadCE (MIT License)*
+    """)
     return
 
 
 @app.cell
 def _():
-    from pathlib import Path
-
     import marimo as mo
     import numpy as np
     import pint
@@ -64,11 +55,8 @@ def _():
 
     import symeval  # noqa: F401  (registers .sym_evalf / .quantity_evalf on sympy)
 
-    IMAGES_DIR = Path(__file__).parent / "images"
-
     return (
         Eq,
-        IMAGES_DIR,
         Piecewise,
         Quantity,
         Symbol,
@@ -360,24 +348,17 @@ def _(
 
 
 @app.cell(hide_code=True)
-def _(IMAGES_DIR, mo):
-    mo.vstack(
-        [
-            mo.md(r"""
-            ## Concentrated force
+def _(mo):
+    mo.md(r"""
+    ## Concentrated force
 
-            A beam of length $L$, pinned at both ends, carries a single point load
-            $P$ at a distance $a$ from the left support. Adjust the length, load
-            and position below.
-            """),
-            mo.image(
-                IMAGES_DIR / "simply-supported-beam-concentrated-force.png",
-                alt="Simply supported beam with a concentrated force",
-                width=250,
-                caption="Schematic: CalcpadCE (MIT License)",
-            ),
-        ]
-    )
+    A beam of length $L$, pinned at both ends, carries a single point load
+    $P$ at a distance $a$ from the left support. Adjust the length, load
+    and position below.
+
+    ![Simply supported beam with a concentrated force](public/simply-supported-beam-concentrated-force.png)
+    *Schematic: CalcpadCE (MIT License)*
+    """)
     return
 
 
@@ -679,25 +660,18 @@ def _(Eq, Quantity, Symbol, a, cf_inputs, cf_m_of_x_left, cf_m_of_x_right, cf_v_
 
 
 @app.cell(hide_code=True)
-def _(IMAGES_DIR, mo):
-    mo.vstack(
-        [
-            mo.md(r"""
-            ## Concentrated moment
+def _(mo):
+    mo.md(r"""
+    ## Concentrated moment
 
-            A beam of length $L$, pinned at both ends, carries a clockwise
-            applied moment $M_0$ at a distance $a$ from the left support. Unlike a
-            force, a pure moment does not change the shear along the span - it only
-            shifts the bending moment, by exactly $M_0$, at the point it's applied.
-            """),
-            mo.image(
-                IMAGES_DIR / "simply-supported-beam-concentrated-moment.png",
-                alt="Simply supported beam with a concentrated moment",
-                width=250,
-                caption="Schematic: CalcpadCE (MIT License)",
-            ),
-        ]
-    )
+    A beam of length $L$, pinned at both ends, carries a clockwise
+    applied moment $M_0$ at a distance $a$ from the left support. Unlike a
+    force, a pure moment does not change the shear along the span - it only
+    shifts the bending moment, by exactly $M_0$, at the point it's applied.
+
+    ![Simply supported beam with a concentrated moment](public/simply-supported-beam-concentrated-moment.png)
+    *Schematic: CalcpadCE (MIT License)*
+    """)
     return
 
 
@@ -992,24 +966,17 @@ def _(
 
 
 @app.cell(hide_code=True)
-def _(IMAGES_DIR, mo):
-    mo.vstack(
-        [
-            mo.md(r"""
-            ## Linearly distributed load
+def _(mo):
+    mo.md(r"""
+    ## Linearly distributed load
 
-            A beam of length $L$, pinned at both ends, carries a load that varies
-            linearly from $0$ at the left support to $w_0$ at the right support.
-            Adjust the length and peak load below.
-            """),
-            mo.image(
-                IMAGES_DIR / "simply-supported-beam-distributed-load-linear.png",
-                alt="Simply supported beam with a linearly distributed load",
-                width=250,
-                caption="Schematic: CalcpadCE (MIT License)",
-            ),
-        ]
-    )
+    A beam of length $L$, pinned at both ends, carries a load that varies
+    linearly from $0$ at the left support to $w_0$ at the right support.
+    Adjust the length and peak load below.
+
+    ![Simply supported beam with a linearly distributed load](public/simply-supported-beam-distributed-load-linear.png)
+    *Schematic: CalcpadCE (MIT License)*
+    """)
     return
 
 
@@ -1259,24 +1226,17 @@ def _(Eq, Quantity, Symbol, lin_inputs, lin_m_of_x, lin_v_of_x, lin_x1_slider, m
 
 
 @app.cell(hide_code=True)
-def _(IMAGES_DIR, mo):
-    mo.vstack(
-        [
-            mo.md(r"""
-            ## Partial uniform load
+def _(mo):
+    mo.md(r"""
+    ## Partial uniform load
 
-            A beam of length $L$, pinned at both ends, carries a uniform load $w$
-            over just part of the span, from $x=a$ to $x=b$. Adjust the length,
-            load, and the two patch boundaries below.
-            """),
-            mo.image(
-                IMAGES_DIR / "simply-supported-beam-distributed-load-partial.png",
-                alt="Simply supported beam with a partial uniform load",
-                width=250,
-                caption="Schematic: CalcpadCE (MIT License)",
-            ),
-        ]
-    )
+    A beam of length $L$, pinned at both ends, carries a uniform load $w$
+    over just part of the span, from $x=a$ to $x=b$. Adjust the length,
+    load, and the two patch boundaries below.
+
+    ![Simply supported beam with a partial uniform load](public/simply-supported-beam-distributed-load-partial.png)
+    *Schematic: CalcpadCE (MIT License)*
+    """)
     return
 
 
@@ -1643,25 +1603,18 @@ def _(
 
 
 @app.cell(hide_code=True)
-def _(IMAGES_DIR, mo):
-    mo.vstack(
-        [
-            mo.md(r"""
-            ## Concentrated forces
+def _(mo):
+    mo.md(r"""
+    ## Concentrated forces
 
-            A beam of length $L$, pinned at both ends, carries two point loads:
-            $P_1$ at a distance $a_1$ from the left support, and $P_2$ at a
-            distance $a_2 \geq a_1$. Adjust the length and the two loads/positions
-            below.
-            """),
-            mo.image(
-                IMAGES_DIR / "simply-supported-beam-forces.png",
-                alt="Simply supported beam with two concentrated forces",
-                width=250,
-                caption="Schematic: CalcpadCE (MIT License)",
-            ),
-        ]
-    )
+    A beam of length $L$, pinned at both ends, carries two point loads:
+    $P_1$ at a distance $a_1$ from the left support, and $P_2$ at a
+    distance $a_2 \geq a_1$. Adjust the length and the two loads/positions
+    below.
+
+    ![Simply supported beam with two concentrated forces](public/simply-supported-beam-forces.png)
+    *Schematic: CalcpadCE (MIT License)*
+    """)
     return
 
 
